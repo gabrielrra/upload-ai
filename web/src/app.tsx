@@ -51,16 +51,24 @@ export function App() {
             <a
               href="https://www.linkedin.com/in/gabrielrra/"
               className="text-violet-400"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Gabriel Amorim
             </a>
             , no NLW da RocketSeat
           </span>
           <Separator orientation="vertical" className="h-6" />
-          <Button variant={'outline'}>
-            <Github className="w-4 h-4 mr-2"></Github>
-            Github
-          </Button>
+          <a
+            href="https://github.com/gabrielrra"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant={'outline'}>
+              <Github className="w-4 h-4 mr-2"></Github>
+              Github
+            </Button>
+          </a>
         </div>
       </div>
 
