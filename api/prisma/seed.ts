@@ -56,6 +56,38 @@ Transcrição:
 '''`.trim(),
     },
   });
+
+  await prisma.prompt.create({
+    data: {
+      title: 'Textos para postagens',
+      template:
+        `Seu papel é gerar texto para postagens em diferentes plataformas.
+  
+Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar diferentes posts para diferentes plataformas: twitter, instagram, facebook, youtube e tiktok
+
+Adeque a sua linguagem para cada plataforma.
+
+O texto da postagem deve possuir no máximo 100 palavras, contendo uma citação do vídeo e uma breve descrição.
+
+Use palavras chamativas e que cativam a atenção dos usuários conforme a plataforma.
+
+Além disso, no final da descrição inclua uma lista de 3 até 10 hashtags em letra minúscula contendo palavras-chave do vídeo.
+
+O retorno deve seguir o seguinte formato:
+'''
+Nome da plataforma:
+
+- Texto da postagem
+
+#hashtag1 #hashtag2 #hashtag3 ...
+'''
+
+Transcrição:
+'''
+{transcription}
+'''`.trim(),
+    },
+  });
 }
 
 main()
