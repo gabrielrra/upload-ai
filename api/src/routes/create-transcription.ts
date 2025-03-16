@@ -1,8 +1,12 @@
 import { FastifyInstance } from 'fastify';
+import { createReadStream } from 'node:fs';
+import OpenAI from 'openai';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
-import { createReadStream } from 'node:fs';
-import { openAi } from '../lib/openai';
+
+export const openAi = new OpenAI({
+  apiKey: process.env.OPENAI_KEY || '',
+});
 
 export async function createTranscriptionRoute(app: FastifyInstance) {
   app.post('/videos/:videoId/transcription', async (req) => {

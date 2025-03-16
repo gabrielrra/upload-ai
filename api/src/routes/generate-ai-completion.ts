@@ -1,8 +1,8 @@
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
-import { openAi } from '../lib/openai';
-import { streamToResponse, OpenAIStream } from 'ai'
 
 export async function generateAiCompletionRoute(app: FastifyInstance) {
   app.post('/ai/complete', async (req, reply) => {
@@ -28,20 +28,22 @@ export async function generateAiCompletionRoute(app: FastifyInstance) {
       video.transcription
     );
 
-    const response = await openAi.chat.completions.create({
-      model: 'gpt-3.5-turbo-16k',
+    const response = streamText({
+      model: openai('gpt-3.5-turbo-16k'),
+      system: 'You are a helpful video transcript analyzer.',
       temperature,
       messages: [{ role: 'user', content: promptMessage }],
-      stream: true,
     });
 
-    const stream = OpenAIStream(response)
+    // const stream = OpenAIStream(response);
 
-    streamToResponse(stream, reply.raw, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      }
-    })
+    return response.toDataStreamResponse();
+
+    // streamToResponse(stream, reply.raw, {
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    //   }
+    // });
   });
 }
