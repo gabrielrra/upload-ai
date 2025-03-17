@@ -1,0 +1,16 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=file:./db.sqlite
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    environment:
+      - DATABASE_URL=file:./db.sqlite
+      - NODE_ENV=development
+    command: ['npm', 'run', 'dev']

@@ -18,5 +18,6 @@ app.register(generateAiCompletionRoute);
 app
   .listen({
     port: 3000,
+    host: '0.0.0.0',
   })
   .then((a) => console.log(`Server is running on ${a}`));
