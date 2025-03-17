@@ -48,11 +48,10 @@ cd api
 npm install
 ```
 
-3. Certifique-se de ter a sua chave da Open AI e localização do arquivo do banco de dados no arquivo de váriaveis de ambiente da API [.env](api/.env)
+3. Certifique-se de ter a localização do arquivo do banco de dados no arquivo de váriaveis de ambiente da API [.env](api/.env)
 
 ```shell
 DATABASE_URL="file:./dev.db"
-OPENAI_KEY="<SUA CHAVE>"
 ```
 
 4. Inicialize o banco de dados

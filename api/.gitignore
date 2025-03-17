@@ -173,4 +173,4 @@ dist
 
 tmp/*
 
-prisma/dev.db
+prisma/db.sqlite

@@ -4,9 +4,7 @@ import OpenAI from 'openai';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
 
-export const openAi = new OpenAI({
-  apiKey: process.env.OPENAI_KEY || '',
-});
+export const openAi = new OpenAI({ apiKey: '' });
 
 export async function createTranscriptionRoute(app: FastifyInstance) {
   app.post('/videos/:videoId/transcription', async (req) => {
@@ -31,6 +29,7 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
     else {
       const audioReadStream = createReadStream(video.path);
 
+      openAi.apiKey = '';
       const response = await openAi.audio.transcriptions.create({
         file: audioReadStream,
         model: 'whisper-1',

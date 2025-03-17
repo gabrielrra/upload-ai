@@ -1,9 +1,11 @@
 services:
   api:
+    container_name: api_dev
     build:
       context: ./api
       dockerfile: Dockerfile
       args:
+        - NODE_ENV=development
         - DATABASE_URL=file:./db.sqlite
     ports:
       - '3000:3000'
@@ -13,4 +15,4 @@ services:
     environment:
       - DATABASE_URL=file:./db.sqlite
       - NODE_ENV=development
-    command: ['npm', 'run', 'dev']
+    command: npm run prisma:init && npm run dev

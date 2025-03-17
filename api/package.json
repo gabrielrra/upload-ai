@@ -7,7 +7,7 @@
     "prisma:init": "prisma generate && prisma migrate dev",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/src/server.js"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
