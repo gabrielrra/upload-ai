@@ -2,18 +2,18 @@
   "name": "upload-ai-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",
   "scripts": {
-    "prisma:init": "prisma generate && prisma migrate dev",
+    "prisma:init": "prisma migrate dev",
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start": "node dist/src/server.js"
+    "build": "scripts/build.sh",
+    "start": "node dist/src/server.js",
+    "start:prod": "node src/server.js"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "scripts/seed.sh"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gabriel Amorim",
   "license": "ISC",
   "dependencies": {
     "@ai-sdk/openai": "^1.2.5",

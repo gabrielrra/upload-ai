@@ -12,12 +12,16 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV DATABASE_URL=""
 
-COPY --from=builder /app/dist ./dist
 COPY package*.json ./
 RUN npm ci --only=production
+
+COPY --from=builder /app/dist ./
+COPY --from=builder /app/scripts ./scripts
+RUN chmod +x ./scripts/*
+RUN chown -R node:node /app/prisma /app/src /app/scripts /app/node_modules/prisma /app/node_modules/@prisma/client /app/node_modules/.prisma/client
 
 # Use non-root user for security
 USER node
 
 EXPOSE 3000
-CMD ["npm", "start"]
+ENTRYPOINT [ "./scripts/entrypoint.sh" ]
